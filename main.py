@@ -25,7 +25,10 @@ def fastPrint(words):
 
 class Objective:
 
-    def __init__(self, objective_num, location_bottom_left, location_top_right, direction, image_description):
+    def __init__(
+            self, objective_num, location_bottom_left, location_top_right, 
+            direction, image_description
+            ):
         self.objective_num = objective_num
         self.location_bottom_left = location_bottom_left
         self.location_top_right = location_top_right
@@ -38,14 +41,49 @@ class Objective:
                   f"displays {self.image_description} "
                   )
 
+    def puzzle(self, objective_num):
 
-first_objective = Objective(1, (325, 185), (000, 000))
+        if objective_num == 1:
+            pass
+        elif objective_num == 2:
+            pass
+        elif objective_num == 3:
+            pass
+        elif objective_num == 4:
+            pass
+        elif objective_num == 5:
+            pass
+        elif objective_num == 6:
+            pass
+        elif objective_num == 7:
+            pass
+        elif objective_num == 8:
+            pass
+        elif objective_num == 9:
+            pass
+        elif objective_num == 10:
+            pass
+        elif objective_num == 11:
+            pass
+        else:
+            Print("ERR")
+
+
+class Puzzle:
+    def __init__(self):
+        pass
+
+first_puzzle = Puzzle()
+
+first_objective = Objective(1, (325, 185), (000, 000), "SE", "a fish with 2 eyes")
+
+Objective.scanned(first_objective)
 
 dev = input("")
 
-
 if dev == "dev":
     intro = False
+
 else:
     intro = True
 
@@ -89,8 +127,10 @@ if intro:
 
     if  ans == "n":
         tutorial = False
+
     elif ans == "y":
         tutorial = True
+
     else:
         Print("err: assuming you want tutorial")
         tutorial = True

@@ -5,12 +5,7 @@ Basically the story is that of iron lung
 """
 
 #IMPORTS
-import time
-
-class Objective:
-
-    def __init__(self, objective_num, location, direction)
-
+import time, random
 
 def Print(words):
     letters = list(words)
@@ -27,6 +22,24 @@ def fastPrint(words):
         print (letter, end="", flush=True)
         time.sleep(0.015)
 
+
+class Objective:
+
+    def __init__(self, objective_num, location_bottom_left, location_top_right, direction, image_description):
+        self.objective_num = objective_num
+        self.location_bottom_left = location_bottom_left
+        self.location_top_right = location_top_right
+        self.direction = direction
+        self.image_description = image_description
+    
+    def scanned(self):
+        fastPrint(
+                  f"The screen loads slowly, and in black and white it "
+                  f"displays {self.image_description} "
+                  )
+
+
+first_objective = Objective(1, (325, 185), (000, 000))
 
 dev = input("")
 
@@ -83,6 +96,6 @@ if intro:
         tutorial = True
 
     while tutorial:
-        pass
+        fastPrint("")
 
 

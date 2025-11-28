@@ -22,6 +22,11 @@ def fastPrint(words):
         print (letter, end="", flush=True)
         time.sleep(0.015)
 
+class Player:
+    def __init__(
+        self, location, direction, speed, objectives_scanned
+    )
+
 
 class Objective:
 
@@ -41,39 +46,12 @@ class Objective:
                   f"displays {self.image_description} "
                   )
 
-    def puzzle(self, objective_num):
 
-        if objective_num == 1:
-            pass
-        elif objective_num == 2:
-            pass
-        elif objective_num == 3:
-            pass
-        elif objective_num == 4:
-            pass
-        elif objective_num == 5:
-            pass
-        elif objective_num == 6:
-            pass
-        elif objective_num == 7:
-            pass
-        elif objective_num == 8:
-            pass
-        elif objective_num == 9:
-            pass
-        elif objective_num == 10:
-            pass
-        elif objective_num == 11:
-            pass
-        else:
-            Print("ERR")
+player = Player((150,90), 0, 0, 0)
 
 
-class Puzzle:
-    def __init__(self):
-        pass
 
-first_puzzle = Puzzle()
+
 
 first_objective = Objective(1, (325, 185), (000, 000), "SE", "a fish with 2 eyes")
 
@@ -136,6 +114,16 @@ if intro:
         tutorial = True
 
     while tutorial:
-        fastPrint("")
-
-
+        Print("\n||Tutorial||")
+        fastPrint(
+            "\n\nYou spawn in at coordinates 150,90 facing north and have to "
+            "scan various objectives to complete the game."
+            )
+        fastPrint(
+            "\nThe game is played via various inputs you type in if you input "
+            "'help' it will display all the avaliable inputs that can be made."
+            )
+        fastPrint("\nfor example if you input 'scan':")
+        Print("\nscan location")
+        fastPrint("\nyou scan your current location on the submarine terminal")
+        fastPrint(f"LOCATION: {player.location}")

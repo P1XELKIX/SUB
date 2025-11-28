@@ -24,12 +24,13 @@ def fastPrint(words):
 
 class Player:
     def __init__(
-        self, location, direction, speed, objectives_scanned
+        self, location, direction, speed, objectives_scanned, hull_damage
     ):
         self.location = location
         self.direction = direction
         self.speed = speed
         self.objectives_scanned = objectives_scanned
+        self.hull_damage = hull_damage
 
 
 class Objective:
@@ -53,21 +54,20 @@ class Objective:
 
 player = Player((150,90), 0, 0, 0)
 
+possible_moves = ["Help", "Move", "Turn", "Scan", "Compass", "Map", "Fix"]
 
+dev = input("")
 
+if dev == "dev":
+    intro = False
+else:
+    intro = True
 
 
 first_objective = Objective(1, (325, 185), (000, 000), "SE", "a fish with 2 eyes")
 
 Objective.scanned(first_objective)
 
-dev = input("")
-
-if dev == "dev":
-    intro = False
-
-else:
-    intro = True
 
 if intro:
     Print("Welcome To SUSTAINED PRESSURE")
@@ -117,7 +117,7 @@ if intro:
         Print("err: assuming you want tutorial")
         tutorial = True
 
-    while tutorial:
+    if tutorial:
         Print("\n||Tutorial||")
         fastPrint(
             "\n\nYou spawn in at coordinates 150,90 facing north and have to "

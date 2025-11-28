@@ -25,7 +25,11 @@ def fastPrint(words):
 class Player:
     def __init__(
         self, location, direction, speed, objectives_scanned
-    )
+    ):
+        self.location = location
+        self.direction = direction
+        self.speed = speed
+        self.objectives_scanned = objectives_scanned
 
 
 class Objective:
@@ -126,4 +130,4 @@ if intro:
         fastPrint("\nfor example if you input 'scan':")
         Print("\nscan location")
         fastPrint("\nyou scan your current location on the submarine terminal")
-        fastPrint(f"LOCATION: {player.location}")
+        fastPrint(f"\n\nLOCATION: {player.location}")

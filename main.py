@@ -2,10 +2,15 @@
 God forbid i set myself an easy project :/
 Basically the story is that of iron lung
 
+
 """
+
 
 #IMPORTS
 import time, random, threading, math
+
+
+
 
 
 
@@ -18,51 +23,64 @@ class Player:
         self.speed = speed
         self.objectives_scanned = objectives_scanned
         self.hull_integrity = hull_integrity
-        
+       
         self.move_player = False
         self.move_input = 0
         self.stop_moving = False
         self.next_objective = Objective(1, [325, 185], 135, "a fish with 2 eyes")
 
 
+
+
     def action_input(self):
         player_input = input("\n").lower().strip()
 
+
         if player_input == "help":
-            Print("\nAvaliable actions: ")
+            normalPrint("\nAvaliable actions: ")
+
 
             for option in player_options.action:
                 fastPrint("\n" + option)
-            print("")
+            normalPrint("")
+
 
         elif player_input == "move":
             self.stop_moving = False
-            Print(
+            normalPrint(
                 "how many seconds do you want to move at 10 meters per second"
                 )
             self.move_input = int(input("\n"))
             self.move_player = True
 
 
-        
+
+
+       
         elif player_input == "turn":
-            Print(
+            normalPrint(
                 "\nwould you like to turn clockwise or anti clockwise"
                 )
             turn_input = input("\n").lower().strip()
             if turn_input == "clockwise":
-                Print("\nhow far would you like to turn in degrees:")
+                normalPrint("\nhow far would you like to turn in degrees:")
+
 
                 turn_clockwise = int(input("\n"))
 
+
                 player.direction += turn_clockwise
 
+
             elif turn_input == "anticlockwise":
-                Print("\nhow far would you like to turn in degrees:")
+                normalPrint("\nhow far would you like to turn in degrees:")
+
 
                 turn_anticlockwise = int(input("\n"))
 
+
                 player.direction -= turn_anticlockwise
+
 
             while player.direction > 360:
                 player.direction -= 360
@@ -70,48 +88,68 @@ class Player:
                 player.direction += 360
 
 
+
+
         elif player_input == "scan":
-            Print("\nWhat would you like to scan:")
+            normalPrint("\nWhat would you like to scan:")
+
 
             for option in player_options.scan:
                 fastPrint("\n" + option)
-            print("")
+            normalPrint("")
+
 
             scan_input = input("\n").lower().strip()
 
+
             if scan_input == "location":
-                Print(f"\nLOCATION: {player.location}")
+               normalPrint(f"\nLOCATION: {player.location}")
+
+
             elif scan_input == "direction":
-                Print(f"\nDIRECTION: {player.direction}° clockwise from North")
+               normalPrint(f"\nDIRECTION: {player.direction}° clockwise from North")
+
+
             elif scan_input == "damage":
-                Print(f"\nHULL INTEGRITY: {player.hull_integrity}%")
+               normalPrint(f"\nHULL INTEGRITY: {player.hull_integrity}%")
+
+
             elif scan_input == "objective":
-                self.next_objective.check_objective()
+                self.next_objective.check_objective(self)
                 if player.next_objective.location[0] - 10 < player.location[0] \
                     < player.next_objective.location[0] + 10 and \
                     player.next_objective.location[1] - 10 < player.location[1] \
                     < player.next_objective.location[1] + 10:
-                    
-                    player.next_objective.scanned()
+                   
+                    Player.next_objective.scanned()
+
 
             elif scan_input == "nextobjective":
-                Print(f"\nLOCATION: {player.next_objective.location_x}")
+                normalPrint(f"\nLOCATION: {player.next_objective.location_x}")
+
+
 
 
 #        self.scan = ["location", "direction", "damage", "objective", "next objective"]
 
+
         elif player_input == "fix":
             pass
 
+
         elif player_input == "clock":
             fastPrint("You check your watch:")
-            Print(f"\nyou only have {(oxygen_time_left // 60)} minutes & {oxygen_time_left % 60} seconds of oxygen remaining.")
+            normalPrint(f"\nyou only have {int(oxygen_time_left // 60)} minutes & {int(oxygen_time_left % 60)} seconds of oxygen remaining.")
+
 
         elif player_input == "stop":
             self.stop_moving = True
 
 
+
+
 class Objective:
+
 
     def __init__(
             self, objective_num, location,
@@ -121,49 +159,62 @@ class Objective:
         self.location = location
         self.direction = direction
         self.image_description = image_description
-    
+   
     def scanned(self):
         fastPrint(
                   f"The screen loads slowly, and in black and white it "
                   f"displays {self.image_description} "
                   )
-        
-    def check_objective(self):
+       
+    def check_objective(self, Player):
 
-        if player.objectives_scanned == 1:
+
+        if Player.objectives_scanned == 1:
             pass
 
-        elif player.objectives_scanned == 2:
-            player.next_objective = Objective(2, [385, 250], 45, "a wierd temple")
 
-        elif player.objectives_scanned == 3:
-            player.next_objective = Objective(3, [258, 416], 135, "half a statue of the moon")
+        elif Player.objectives_scanned == 2:
+            Player.next_objective = Objective(2, [385, 250], 45, "a wierd temple")
 
-        elif player.objectives_scanned == 4:
-            player.next_objective = Objective(4, [525, 275], 315, "large white curved spikes")
 
-        elif player.objectives_scanned == 5:
-            player.next_objective = Objective(5, [658, 166], 265, "scraps of metal strewn around")
+        elif Player.objectives_scanned == 3:
+            Player.next_objective = Objective(3, [258, 416], 135, "half a statue of the moon")
 
-        elif player.objectives_scanned == 6:
-            player.next_objective = Objective(6, [850, 300], 45, "scraps of metal strewn around")
 
-        elif player.objectives_scanned == 7:
-            player.next_objective = Objective(7, [633, 525], 90, "scraps of metal strewn around")
+        elif Player.objectives_scanned == 4:
+            Player.next_objective = Objective(4, [525, 275], 315, "large white curved spikes")
 
-        elif player.objectives_scanned == 8:
-            player.next_objective = Objective(8, [175, 575], 180, "scraps of metal strewn around")
 
-        elif player.objectives_scanned == 9:
-            player.next_objective = Objective(9, [316, 758], 0, "scraps of metal strewn around")
+        elif Player.objectives_scanned == 5:
+            Player.next_objective = Objective(5, [658, 166], 265, "scraps of metal strewn around")
 
-        elif player.objectives_scanned == 10:
-            player.next_objective = Objective(10, [675, 833], 45, "a thin path probably too thin to fit the submarine")
 
-        elif player.objectives_scanned == 11:
-            player.next_objective = Objective(11, [942, 875], 90, "scraps of metal strewn around")
+        elif Player.objectives_scanned == 6:
+            Player.next_objective = Objective(6, [850, 300], 45, "scraps of metal strewn around")
+
+
+        elif Player.objectives_scanned == 7:
+            Player.next_objective = Objective(7, [633, 525], 90, "scraps of metal strewn around")
+
+
+        elif Player.objectives_scanned == 8:
+            Player.next_objective = Objective(8, [175, 575], 180, "scraps of metal strewn around")
+
+
+        elif Player.objectives_scanned == 9:
+            Player.next_objective = Objective(9, [316, 758], 0, "scraps of metal strewn around")
+
+
+        elif Player.objectives_scanned == 10:
+            Player.next_objective = Objective(10, [675, 833], 45, "a thin path probably too thin to fit the submarine")
+
+
+        elif Player.objectives_scanned == 11:
+            Player.next_objective = Objective(11, [942, 875], 90, "scraps of metal strewn around")
+
 
 #Prints the direction you are facing as a angle clockwise from North
+
 
 class Action:
     def __init__(self):
@@ -178,8 +229,11 @@ class Action:
             }
         self.scan = ["location", "direction", "damage", "objective", "next objective"]
 
+
 player = Player([150,90], 0, 10, 0, 100)
 player_options = Action()
+
+
 
 
 moving_avaliable = True
@@ -188,6 +242,8 @@ oxygen_time_left = 600
 time_passed = 0
 clock_running = True
 clock_active = False
+
+
 
 
 def game_clock():
@@ -201,6 +257,7 @@ def game_clock():
         else:
             time.sleep(0.1)
 
+
 def moving():
     while moving_avaliable:
         if player.move_player:
@@ -208,40 +265,57 @@ def moving():
             x_axis_direction = math.cos(radians) * player.speed
             y_axis_direction = math.sin(radians) * player.speed
 
+
             for seconds in range(player.move_input):
+
 
                 for number in range(10):
                     if not player.stop_moving:
                         player.location[0] += (x_axis_direction / 10)
                         player.location[1] += (y_axis_direction /  10)
-                        print(player.location)
+                        normalPrint(player.location)
                         time.sleep(0.1)
         player.move_player = False
         time.sleep(0.1)
 
 
+
+
 moving_thread = threading.Thread(target=moving, daemon=True)
 clock_thread = threading.Thread(target=game_clock, daemon=True)
 
+
 moving_thread.start()
+
 
 clock_thread.start()
 
+
 #CHANGE BACK BEFORE HAND IN
-def Print(words):
+def normalPrint(words):
     letters = list(words)
 
+
     for letter in letters:
-        print (letter, end="", flush=True)
-        #time.sleep(0.08)
+        normalPrint(letter, end="", flush=True)
+        time.sleep(0.08)
+
+
 
 
 def fastPrint(words):
     letters = list(words)
 
+
     for letter in letters:
-        print (letter, end="", flush=True)
-        #time.sleep(0.015)
+        normalPrint(letter, end="", flush=True)
+        time.sleep(0.015)
+
+
+
+
+
+
 
 
 
@@ -250,6 +324,7 @@ def fastPrint(words):
 
 dev = input("")
 
+
 if dev == "dev":
     intro = False
 else:
@@ -257,8 +332,12 @@ else:
 
 
 
+
+
+
 if intro:
-    Print("Welcome To SUSTAINED PRESSURE")
+    normalPrint("Welcome To SUSTAINED PRESSURE")
+
 
     fastPrint(
     '\n\nIn a future where humanity has colonized space, an event known as '
@@ -267,6 +346,7 @@ if intro:
     'space stations or starships alive.'
     )
 
+
     fastPrint(
     '\n\nTo secure the survival of humanity, an expedition is launched an '
     'expedition to AT-5, a desolate moon that has recently formed an '
@@ -274,11 +354,13 @@ if intro:
     'desperately required to sustain human life'
     )
 
+
     fastPrint(
     '\n\nYou are a convict sent to navigate the trenches of the blood ocean '
     'in a small submarine known officially as XDDCC, nicknamed the '
     '"STEEL Lung", to verify the existence of the resources'
     )
+
 
     fastPrint(
     '\n\nDue to the pressure and depth of the ocean, the main hatch is '
@@ -286,31 +368,39 @@ if intro:
     'communications are lost shortly after submerging.'
     )
 
+
     fastPrint(
     '\n\nYou are promised freedom your upon your return to the surface, but '
     'a note left by a previous occupant of the submarine warns you otherwise.'
     )
 
-    Print(
+
+    normalPrint(
     '\n\nYou only have 10 minutes make them count.'
     )
 
-    Print("\n\nWould you like a tutorial? [Y/n]")
+
+    normalPrint("\n\nWould you like a tutorial? [Y/n]")
+
 
     ans = input("\n").strip().lower()
+
 
     if  ans == "n":
         tutorial = False
 
+
     elif ans == "y":
         tutorial = True
 
+
     else:
-        Print("err: assuming you want tutorial")
+        normalPrint("err: assuming you want tutorial")
         tutorial = True
 
+
     if tutorial:
-        Print("\n||Tutorial||")
+        normalPrint("\n||Tutorial||")
         fastPrint(
             "\n\nYou spawn in at coordinates 150,90 facing north and have to "
             "scan various objectives to complete the game."
@@ -320,11 +410,11 @@ if intro:
             "'help' it will display all the avaliable inputs that can be made."
             )
         fastPrint("\n\nfor example if you input 'scan':")
-        Print("\n\ninput: scan")
-        Print("\n\n>>> what would you like to scan?")
+        normalPrint("\n\ninput: scan")
+        normalPrint("\n\n>>> what would you like to scan?")
 # .join(scan options) is taking the list of strings and putting them together seperated by spaces or ", " in this case as a single string
         fastPrint("\n>>> " + ", ".join(player_options.scan))
-        Print("\n\ninput: location")
+        normalPrint("\n\ninput: location")
         fastPrint("\n\n>>> you scan your current location on the submarine terminal")
         fastPrint(f"\n>>> LOCATION: {player.location}")
         fastPrint(
@@ -333,13 +423,19 @@ if intro:
             )
 
 
+
+
 Print(
     "\n\n\nYour submarine shudders as you reach the designated depth."
     "\nYou check your pocket watch you only have 10 minutes of oxygen it "
     "would be best to move quickly"
     )
 
+
 clock_active = True
+
 
 while playing:
     player.action_input()
+
+

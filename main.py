@@ -116,10 +116,10 @@ class Player:
 
             elif scan_input == "objective":
                 self.next_objective.check_objective(self)
-                if player.next_objective.location[0] - 10 < player.location[0] \
-                    < player.next_objective.location[0] + 10 and \
-                    player.next_objective.location[1] - 10 < player.location[1] \
-                    < player.next_objective.location[1] + 10:
+                if self.next_objective.location[0] - 10 < self.location[0] \
+                    < self.next_objective.location[0] + 10 and \
+                    self.next_objective.location[1] - 10 < self.location[1] \
+                    < self.next_objective.location[1] + 10:
                    
                     Player.next_objective.scanned()
 
@@ -297,7 +297,7 @@ def normalPrint(words):
 
 
     for letter in letters:
-        normalPrint(letter, end="", flush=True)
+        print(letter, end="", flush=True)
         time.sleep(0.08)
 
 
@@ -308,7 +308,7 @@ def fastPrint(words):
 
 
     for letter in letters:
-        normalPrint(letter, end="", flush=True)
+        print(letter, end="", flush=True)
         time.sleep(0.015)
 
 
